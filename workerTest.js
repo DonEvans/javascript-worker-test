@@ -4,7 +4,7 @@ const myWorker = []
 if (window.Worker) {
   for (let i = 0; i<4; i++) {
     myWorker[i] = new Worker("worker.js");
-    myWorker[i].postMessage(JSON.stringify(10);
+    myWorker[i].postMessage(JSON.stringify(10));
    myWorker.onmessage = function(event) {
       console.log(`Worker says range is ${JSON.parse(event.data)}`);
     }

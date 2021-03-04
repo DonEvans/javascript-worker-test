@@ -5,5 +5,5 @@ onmessage = function(event) {
   
   //let num2 = JSON.parse(event.data[1]);
   //let result = num1 + num2;
-  postMessage(JSON.stringify(range[0] );
+  postMessage(JSON.stringify(range[0]) );
 }

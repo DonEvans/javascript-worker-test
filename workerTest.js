@@ -1,10 +1,13 @@
 //Test of worker threads on my system
 
+const myWorker = []
 if (window.Worker) {
-  const myWorker = new Worker("worker.js");
-  myWorker.postMessage("Hello from main!");
-  myWorker.onmessage = function(event) {
-    console.log("Message received from worker.");
+  for (let i = 0; i<4; i++) {
+    myWorker[i] = new Worker("worker.js");
+    myWorker[i].postMessage((10*i), (20*i));
+   myWorker.onmessage = function(event) {
+      console.log(`Worker says range is ${event.data}`);
+    }
   }
 }else {
   console.log('Your browser doesn\'t support web workers.');

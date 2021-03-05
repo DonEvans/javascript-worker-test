@@ -47,7 +47,15 @@ for (let i=0; i<threadCount; i++) {
     */
 
     primeCount1 += primeCount;
+    threadDone.push(true);
   }
+}
+
+//Wait for worker threads to finish
+while (threadDone.length < 4){
+  setTimeout(function() {
+    continue;
+  }, 20)
 }
 
 

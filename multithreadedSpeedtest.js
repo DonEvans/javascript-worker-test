@@ -20,25 +20,37 @@ let threadDone = [];
 let startDate = new Date();
 let startTime = startDate.getTime();
 
-/*
+
 //Make workers (Javascript threads) in loop
-let thread = [];
+const myWorker = [];
 let message = [];
 for (let i=0; i<threadCount; i++) {
+
+  myWorker[i] = new Worker("worker.js");
+  let range = [START, MAX, startTime];
+  myWorker[i].postMessage(JSON.stringify(range) );
+
+  myWorker[i].onmessage = function(event) {
+    //Receive message from thread and extract results
+    let results = JSON.parse(event.data);
+    let primeCount = results[0];
+    let runtime = results[1];
+    console.log(`Worker says ${primeCount} primes found in ${runtime} seconds.`);
+
+/* OLD CODE
   thread[i] = new Worker('primeCounter.js');
   thread[i].postMessage("Hello from thread" + i);
   //Listen for messages from completed threads and post to console
   thread[i].onmessage = function(event) {
     message[i] = event.data;
     console.log("Thread message:" + message[i]);
+    */
+
+    primeCount1 += primeCount;
   }
 }
-*/
 
-//Return prime count and runtime in a results array
-//This can be turned into multithreaded code later
-let results = primeCounter(START, MAX, startTime);
-primeCount1 += results[0];
+
 //Record finish time
 let finishTime = new Date().getTime();
 let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
@@ -47,40 +59,4 @@ console.log(primeCount1 + " primes found in " + runtime + " seconds.");
 
 
 
-function primeCounter(min, max, startTime) {
-  //Range is set by parameters
-  //In loop, test each number in a given range to see if it is prime
-  //Don't need to test evens so ensure minimum value is odd
-  //then increment by 2
-  if (min%2 == 0) {
-    min+=1;
-  }
-  let primeCount2 = 0;
-  for (let i = min; i<=max; i+=2) {
-    let candidate = i;
 
-    //Find square root for each number in range
-    let sqrt = Math.sqrt(i);
-    let isPrime = true;
-    //Test for prime by dividing candidate by every odd integer 
-    //less than the square root
-
-    for (let j=3; j<=sqrt; j+=2) {
-
-      //Move to next if candidate divisible
-      if (candidate%j === 0) {
-        isPrime = false;
-        break;
-      }
-    }
-    if (isPrime == true) {
-      primeCount2++;
-    }
-  }
-  //Make and return results array with number of primes and runtime
-  let threadRunTime = new Date().getTime() - startTime;
-  let results = [primeCount2, threadRunTime];
-  //Write runtime to console before returning to main
-  console.log("Thread working from " + min + " to " + max+ " finished in " + threadRunTime);
-  return results;
-}

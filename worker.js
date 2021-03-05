@@ -10,7 +10,7 @@ onmessage = function(event) {
   results1 = primeCounter(min1, max1, startTime1);
   
   //Send results back to main thread
-  postMessage(JSON.stringify(num2));
+  postMessage(JSON.stringify(results1));
 }
 
 function primeCounter(min, max, startTime) {

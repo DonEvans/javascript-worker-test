@@ -7,7 +7,7 @@ onmessage = function(event) {
   let max1 = range[1];
   let startTime1 = range[2];
 
-  results1 = primeCounter(min1, max1, startTime1);
+  let results1 = primeCounter(min1, max1, startTime1);
   
   //Send results back to main thread
   postMessage(JSON.stringify(results1));

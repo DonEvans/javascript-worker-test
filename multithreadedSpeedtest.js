@@ -16,9 +16,9 @@ const START = 9;
 const MAX = 4000000;
 //The next two values, thread count and problem sections, have to be set together.
 //They specify the number of threads and how the work is divided
-const threadCount = 2;
+const threadCount = 1;
 //Make array to specify which range of values each thread is reponsible for
-const problemSections = [START, 2440001, MAX];
+const problemSections = [START, MAX];
 //Add flag to array when threads reach the end of their loops
 let threadDone = [];
 let startDate = new Date();

@@ -48,14 +48,24 @@ for (let i=0; i<threadCount; i++) {
 
     primeCount1 += primeCount;
     threadDone.push(true);
+
+    if (threadDone.length = threadCount) {
+      //Record finish time
+      let finishTime = new Date().getTime();
+      let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
+
+      console.log(primeCount1 + " primes found in " + runtime + " seconds.");
+    }
+
   }
 }
 
+/*
 //Wait for worker threads to finish
 while (threadDone.length < threadCount){
   setTimeout(function() { return true; }, 20)
 }
-
+*/
 
 //Record finish time
 let finishTime = new Date().getTime();

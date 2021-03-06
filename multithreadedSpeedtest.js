@@ -52,7 +52,7 @@ for (let i=0; i<threadCount; i++) {
 }
 
 //Wait for worker threads to finish
-while (threadDone.length < 4){
+while (threadDone.length < threadCount){
   setTimeout(function() { return true; }, 20)
 }
 

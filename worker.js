@@ -1,13 +1,13 @@
 //The first section of code handles worker communication with the main thread.
 //It passes parameters to the prime counter function which counts the primes
 onmessage = function(event) {
-  console.log("Thread launched!");
+
   //Extract parameters from JSON message
   let range = JSON.parse(event.data);
   let min1 = range[0];
   let max1 = range[1];
   let startTime1 = range[2];
-
+  console.log("thread launch" + max1);
   let results1 = primeCounter(min1, max1, startTime1);
   
   //Write runtime to console before returning to main

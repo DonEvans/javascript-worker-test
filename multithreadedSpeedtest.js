@@ -6,7 +6,7 @@
 
 //Prepare to send resultsto webpage
 document.addEventListener("DOMContentLoaded", function() {
-  let resultsField = document.querySelector("#resultsField");
+  let resultsField = document.querySelector("#resultField");
 });
 
 //Set prime count to 4 because 2,3,5 and 7 are prime.
@@ -49,7 +49,8 @@ for (let i=0; i<threadCount; i++) {
       let finishTime = new Date().getTime();
       let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
 
-      let resultMessage = primeCount1 + " primes found in " + runtime + " milliseconds.";
+      let resultMessage = threadCount + " threads counting all primes under " + MAX; 
+      resultMessage += " found " + primeCount1 + " primes in " + runtime + " milliseconds.";
       console.log(resultMessage);
       resultsField.innerHTML = resultMessage;
     }

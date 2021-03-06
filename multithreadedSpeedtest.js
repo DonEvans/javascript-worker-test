@@ -12,9 +12,9 @@ const START = 9;
 const MAX = 4000000;
 //The next two values, thread count and problem sections, have to be set together.
 //They specify the number of threads and how the work is divided
-const threadCount = 2;
+const threadCount = 4;
 //Make array to specify which range of values each thread is reponsible for
-const problemSections = [START, 2440001, MAX];
+const problemSections = [START, 1480001,2440001, 3280001, MAX];
 //Add flag to array when threads reach the end of their loops
 let threadDone = [];
 let startDate = new Date();
@@ -25,7 +25,7 @@ let startTime = startDate.getTime();
 const myWorker = [];
 let message = [];
 for (let i=0; i<threadCount; i++) {
-  console.log("Thread made!");
+
   myWorker[i] = new Worker("worker.js");
   let range = [problemSections[i], problemSections[i+1], startTime];
   myWorker[i].postMessage(JSON.stringify(range) );
@@ -37,15 +37,6 @@ for (let i=0; i<threadCount; i++) {
     let runtime = results[1];
     console.log(`Worker says ${primeCount} primes found in ${runtime} seconds.`);
 
-/* OLD CODE
-  thread[i] = new Worker('primeCounter.js');
-  thread[i].postMessage("Hello from thread" + i);
-  //Listen for messages from completed threads and post to console
-  thread[i].onmessage = function(event) {
-    message[i] = event.data;
-    console.log("Thread message:" + message[i]);
-    */
-
     primeCount1 += primeCount;
     threadDone.push(true);
 
@@ -56,23 +47,9 @@ for (let i=0; i<threadCount; i++) {
 
       console.log(primeCount1 + " primes found in " + runtime + " seconds.");
     }
-
   }
 }
 
-/*
-//Wait for worker threads to finish
-while (threadDone.length < threadCount){
-  setTimeout(function() { return true; }, 20)
-}
-*/
-/*
-//Record finish time
-let finishTime = new Date().getTime();
-let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
 
-console.log(primeCount1 + " primes found in " + runtime + " seconds.");
-
-*/
 
 

@@ -12,9 +12,9 @@ const START = 9;
 const MAX = 4000000;
 //The next two values, thread count and problem sections, have to be set together.
 //They specify the number of threads and how the work is divided
-const threadCount = 1;
+const threadCount = 2;
 //Make array to specify which range of values each thread is reponsible for
-const problemSections = [START, MAX];
+const problemSections = [START, 2440001, MAX];
 //Add flag to array when threads reach the end of their loops
 let threadDone = [];
 let startDate = new Date();
@@ -27,7 +27,7 @@ let message = [];
 for (let i=0; i<threadCount; i++) {
   console.log("Thread made!");
   myWorker[i] = new Worker("worker.js");
-  let range = [START, MAX, startTime];
+  let range = [problemSections[i], problemSections[i+1], startTime];
   myWorker[i].postMessage(JSON.stringify(range) );
 
   myWorker[i].onmessage = function(event) {
@@ -66,13 +66,13 @@ while (threadDone.length < threadCount){
   setTimeout(function() { return true; }, 20)
 }
 */
-
+/*
 //Record finish time
 let finishTime = new Date().getTime();
 let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
 
 console.log(primeCount1 + " primes found in " + runtime + " seconds.");
 
-
+*/
 
 

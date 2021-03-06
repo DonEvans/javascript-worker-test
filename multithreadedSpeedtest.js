@@ -16,9 +16,9 @@ const START = 9;
 const MAX = 4000000;
 //The next two values, thread count and problem sections, have to be set together.
 //They specify the number of threads and how the work is divided
-const threadCount = 4;
+const threadCount = 2;
 //Make array to specify which range of values each thread is reponsible for
-const problemSections = [START, 1480001,2440001, 3280001, MAX];
+const problemSections = [START, 2440001, MAX];
 //Add flag to array when threads reach the end of their loops
 let threadDone = [];
 let startDate = new Date();
@@ -39,7 +39,7 @@ for (let i=0; i<threadCount; i++) {
     let results = JSON.parse(event.data);
     let primeCount = results[0];
     let runtime = results[1];
-    console.log(`Worker says ${primeCount} primes found in ${runtime} seconds.`);
+    // console.log(`Worker says ${primeCount} primes found in ${runtime} seconds.`);
 
     primeCount1 += primeCount;
     threadDone.push(true);
@@ -47,7 +47,7 @@ for (let i=0; i<threadCount; i++) {
     if (threadDone.length === threadCount) {
       //Record finish time
       let finishTime = new Date().getTime();
-      let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
+      let runtime = (finishTime - startTime);  
 
       let resultMessage = threadCount + " threads counting all primes under " + MAX; 
       resultMessage += " found " + primeCount1 + " primes in " + runtime + " milliseconds.";

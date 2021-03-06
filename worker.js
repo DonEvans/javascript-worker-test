@@ -11,7 +11,7 @@ onmessage = function(event) {
   let results1 = primeCounter(min1, max1, startTime1);
   
   //Write runtime to console before returning to main
-  console.log("Thread working from " + min1 + " to " + max1+ " finished in " + results[1]);
+  console.log("Thread working from " + min1 + " to " + max1+ " finished in " + results1[1]);
   //Send results back to main thread
   postMessage(JSON.stringify(results1));
 }

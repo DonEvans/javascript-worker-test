@@ -25,7 +25,7 @@ let startTime = startDate.getTime();
 const myWorker = [];
 let message = [];
 for (let i=0; i<threadCount; i++) {
-
+  console.log("Thread made!");
   myWorker[i] = new Worker("worker.js");
   let range = [START, MAX, startTime];
   myWorker[i].postMessage(JSON.stringify(range) );
@@ -49,7 +49,7 @@ for (let i=0; i<threadCount; i++) {
     primeCount1 += primeCount;
     threadDone.push(true);
 
-    if (threadDone.length = threadCount) {
+    if (threadDone.length === threadCount) {
       //Record finish time
       let finishTime = new Date().getTime();
       let runtime = (finishTime - startTime)/1000;  //Get runtime in seconds
